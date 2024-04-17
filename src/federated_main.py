@@ -63,13 +63,13 @@ if __name__ == '__main__':
 
     for epoch1 in tqdm(range(args.epochs)): 
 
-
         local_losses, local_sum = [], []   
         print(f'\n | Global Training Round : {epoch1+1} |\n')
 
         global_model.train()
         m = max(int(args.frac * args.num_users), 1)
         idxs_users = np.random.choice(range(args.num_users), m, replace=False)
+        print('idxs_users:', idxs_users)
 
         for idx in idxs_users:
             loss, lsum = local_model[idx].update_weights(global_round=epoch1, theta=copy.deepcopy(theta))
