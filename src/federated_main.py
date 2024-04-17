@@ -106,4 +106,8 @@ if __name__ == '__main__':
     with open(file_name, 'wb') as f:
         pickle.dump([train_loss, test_acc], f)
 
+    print('\n Results saved to file: {}'.format(file_name))
+    logger.close()
+    
+
 
