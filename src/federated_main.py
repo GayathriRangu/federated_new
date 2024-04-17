@@ -59,7 +59,7 @@ if __name__ == '__main__':
     val_acc_list, net_list = [], []
     cv_loss, cv_acc = [], []
     print_every = 2
-    val_loss_pre, counter = 0, 0
+    #val_loss_pre, counter = 0, 0
 
     for epoch in tqdm(range(args.epochs)): 
 
