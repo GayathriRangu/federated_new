@@ -63,6 +63,7 @@ if __name__ == '__main__':
 
     for epoch1 in tqdm(range(args.epochs)): 
 
+
         local_losses, local_sum = [], []   
         print(f'\n | Global Training Round : {epoch1+1} |\n')
 
