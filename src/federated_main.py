@@ -61,24 +61,24 @@ if __name__ == '__main__':
     print_every = 2
     val_loss_pre, counter = 0, 0
 
-    for epoch in tqdm(range(args.epochs)): 
+    for epoch1 in tqdm(range(args.epochs)): 
 
         local_losses, local_sum = [], []   
-        print(f'\n | Global Training Round : {epoch+1} |\n')
+        print(f'\n | Global Training Round : {epoch1+1} |\n')
 
         global_model.train()
         m = max(int(args.frac * args.num_users), 1)
         idxs_users = np.random.choice(range(args.num_users), m, replace=False)
 
         for idx in idxs_users:
-            loss, lsum = local_model[idx].update_weights(global_round=epoch, theta=copy.deepcopy(theta))
+            loss, lsum = local_model[idx].update_weights(global_round=epoch1, theta=copy.deepcopy(theta))
 
             local_losses.append(copy.deepcopy(loss))
             local_sum.append(copy.deepcopy(lsum))
 
         update_msg = average_weights(local_sum)
 
-        if epoch >= args.target_round:
+        if epoch1 >= args.target_round:
         	args.eta = args.eta_2
         for key in theta.keys():
             theta[key] = update_msg[key] * args.eta + theta[key]
@@ -93,8 +93,8 @@ if __name__ == '__main__':
         test_acc.append(test_acc_1)
         test_loss.append(test_loss_1)
 
-        if (epoch+1) % print_every == 0:
-            print(f' \nAvg Training Stats after {epoch+1} global rounds:')
+        if (epoch1+1) % print_every == 0:
+            print(f' \nAvg Training Stats after {epoch1+1} global rounds:')
             print(f'Training Loss : {np.mean(np.array(train_loss))}')
 
     print('\n Total Run Time: {0:0.4f}'.format(time.time() - start_time))
